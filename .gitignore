@@ -1,13 +1,12 @@
 HELP.md
 build/
 .gradle/
+.idea
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
 
 ### IntelliJ IDEA ###
-.idea
-.idea/workspace.xml
 *.iws
 *.iml
 *.ipr
