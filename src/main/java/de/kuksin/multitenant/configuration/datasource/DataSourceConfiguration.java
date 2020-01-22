@@ -13,8 +13,6 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class DataSourceConfiguration {
 
-    // TODO test with curl and write scripts for that
-
     private final DataSourceProperties dataSourceProperties;
 
     public DataSourceConfiguration(DataSourceProperties dataSourceProperties) {
