@@ -15,5 +15,4 @@ public class ThreadTenantStorage {
     public static void clear(){
         currentTenant.remove();
     }
-
 }

@@ -3,14 +3,12 @@ package de.kuksin.multitenant.configuration.datasource;
 import org.flywaydb.core.Flyway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 
 @Configuration
-@EnableTransactionManagement
 public class DataSourceConfiguration {
 
     private final DataSourceProperties dataSourceProperties;

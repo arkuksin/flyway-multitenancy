@@ -27,51 +27,44 @@ public class CarRestTest {
     private ObjectMapper objectMapper;
 
     @Test
-    void testCarsWithVW() throws Exception {
+    void testCarsWithTwoTenants() throws Exception {
         // given
-        String tenant = "vw";
+        String vwTenant = "vw";
 
         String url = "/cars";
-        Car car = Car.builder()
+        Car vw = Car.builder()
                 .name("Tiguan")
                 .color("Black")
                 .build();
 
         // when
         mockMvc.perform(get(url)
-                .header("X-Tenant", tenant))
+                .header("X-Tenant", vwTenant))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(0)));
 
         mockMvc.perform(post(url)
-                .header("X-Tenant", tenant)
-                .content(objectMapper.writeValueAsString(car))
+                .header("X-Tenant", vwTenant)
+                .content(objectMapper.writeValueAsString(vw))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
 
                 // then
                 .andExpect(status().isCreated());
 
         mockMvc.perform(get(url)
-                .header("X-Tenant", tenant))
+                .header("X-Tenant", vwTenant))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].name", is("Tiguan")))
                 .andExpect(jsonPath("$[0].color", is("Black")));
-    }
 
-    @Test
-    void testCarsWithBMW() throws Exception {
-        // given
         String tenant = "bmw";
-
-        String url = "/cars";
-        Car car = Car.builder()
+        Car bmw = Car.builder()
                 .name("X5")
                 .color("Orange")
                 .build();
 
         // when
-
         mockMvc.perform(get(url)
                 .header("X-Tenant", tenant))
                 .andExpect(status().isOk())
@@ -79,7 +72,7 @@ public class CarRestTest {
 
         mockMvc.perform(post(url)
                 .header("X-Tenant", tenant)
-                .content(objectMapper.writeValueAsString(car))
+                .content(objectMapper.writeValueAsString(bmw))
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
 
                 // then
