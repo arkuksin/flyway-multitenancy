@@ -9,7 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
-@ConfigurationProperties(prefix = "spring")
+@ConfigurationProperties(prefix = "tenants")
 public class DataSourceProperties {
 
     private Map<Object, Object> datasources = new LinkedHashMap<>();

@@ -1,4 +1,7 @@
 spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+tenants:
   datasources:
     vw:
       jdbcUrl: jdbc:h2:mem:vw
@@ -10,5 +13,3 @@ spring:
       driverClassName: org.h2.Driver
       username: sa
       password: password
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
