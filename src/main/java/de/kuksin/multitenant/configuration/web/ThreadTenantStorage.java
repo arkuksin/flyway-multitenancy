@@ -4,11 +4,11 @@ public class ThreadTenantStorage {
 
     private static ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
-    public static void setTenantName(String tenantName) {
-        currentTenant.set(tenantName);
+    public static void setTenantId(String tenantId) {
+        currentTenant.set(tenantId);
     }
 
-    public static String getTenantName() {
+    public static String getTenantId() {
         return currentTenant.get();
     }
 

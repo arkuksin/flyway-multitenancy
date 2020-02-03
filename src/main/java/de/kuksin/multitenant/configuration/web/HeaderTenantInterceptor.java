@@ -12,7 +12,7 @@ public class HeaderTenantInterceptor implements WebRequestInterceptor {
 
     @Override
     public void preHandle(WebRequest request) throws Exception {
-        ThreadTenantStorage.setTenantName(request.getHeader(TENANT_HEADER));
+        ThreadTenantStorage.setTenantId(request.getHeader(TENANT_HEADER));
     }
 
     @Override
