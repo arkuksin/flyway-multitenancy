@@ -7,10 +7,8 @@ import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 
 public class CarRoutingDataSource extends AbstractRoutingDataSource {
 
-    private static final String DEFAULT_TENANT = "vw";
-
     @Override
     protected Object determineCurrentLookupKey() {
-        return ObjectUtils.defaultIfNull(ThreadTenantStorage.getTenantId(), DEFAULT_TENANT);
+        return ThreadTenantStorage.getTenantId();
     }
 }
