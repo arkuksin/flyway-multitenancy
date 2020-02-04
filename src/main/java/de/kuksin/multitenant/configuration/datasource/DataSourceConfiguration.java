@@ -18,19 +18,20 @@ public class DataSourceConfiguration {
     }
 
     @Bean
-    @PostConstruct
     public DataSource dataSource() {
+        CarRoutingDataSource customDataSource = new CarRoutingDataSource();
+        customDataSource.setTargetDataSources(dataSourceProperties.getDatasources());
+        return customDataSource;
+    }
 
+    @PostConstruct
+    public void migrate() {
         dataSourceProperties
                 .getDatasources()
                 .values()
                 .stream()
                 .map(dataSource -> (DataSource) dataSource)
                 .forEach(this::migrate);
-
-        CarRoutingDataSource customDataSource = new CarRoutingDataSource();
-        customDataSource.setTargetDataSources(dataSourceProperties.getDatasources());
-        return customDataSource;
     }
 
     private void migrate(DataSource dataSource) {
