@@ -19,7 +19,7 @@ public class DataSourceConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        CarRoutingDataSource customDataSource = new CarRoutingDataSource();
+        TenantRoutingDataSource customDataSource = new TenantRoutingDataSource();
         customDataSource.setTargetDataSources(dataSourceProperties.getDatasources());
         return customDataSource;
     }
