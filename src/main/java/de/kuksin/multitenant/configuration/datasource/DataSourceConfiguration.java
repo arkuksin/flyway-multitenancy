@@ -6,10 +6,13 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.util.Map;
 
 
 @Configuration
 public class DataSourceConfiguration {
+
+    public static final String DEFAULT_LOCATION = "db/migration/";
 
     private final DataSourceProperties dataSourceProperties;
 
@@ -28,14 +31,15 @@ public class DataSourceConfiguration {
     public void migrate() {
         dataSourceProperties
                 .getDatasources()
-                .values()
-                .stream()
-                .map(dataSource -> (DataSource) dataSource)
+                .entrySet()
                 .forEach(this::migrate);
     }
 
-    private void migrate(DataSource dataSource) {
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+    private void migrate(Map.Entry<Object, Object> set) {
+        Flyway flyway = Flyway.configure()
+                .locations("/db/migration/common", "db/migration/" + set.getKey())
+                .dataSource((DataSource) set.getValue())
+                .load();
         flyway.migrate();
     }
 }

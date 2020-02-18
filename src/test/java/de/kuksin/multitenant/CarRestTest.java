@@ -41,7 +41,7 @@ public class CarRestTest {
         mockMvc.perform(get(url)
                 .header("X-Tenant", vwTenant))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(jsonPath("$", hasSize(1)));
 
         mockMvc.perform(post(url)
                 .header("X-Tenant", vwTenant)
@@ -54,9 +54,11 @@ public class CarRestTest {
         mockMvc.perform(get(url)
                 .header("X-Tenant", vwTenant))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].name", is("Tiguan")))
-                .andExpect(jsonPath("$[0].color", is("Black")));
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].name", is("polo")))
+                .andExpect(jsonPath("$[0].color", is("red")))
+                .andExpect(jsonPath("$[1].name", is("Tiguan")))
+                .andExpect(jsonPath("$[1].color", is("Black")));
 
         String tenant = "bmw";
         Car bmw = Car.builder()
@@ -68,7 +70,7 @@ public class CarRestTest {
         mockMvc.perform(get(url)
                 .header("X-Tenant", tenant))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(0)));
+                .andExpect(jsonPath("$", hasSize(1)));
 
         mockMvc.perform(post(url)
                 .header("X-Tenant", tenant)
@@ -81,8 +83,10 @@ public class CarRestTest {
         mockMvc.perform(get(url)
                 .header("X-Tenant", tenant))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].name", is("X5")))
-                .andExpect(jsonPath("$[0].color", is("Orange")));
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].name", is("x5")))
+                .andExpect(jsonPath("$[0].color", is("white")))
+                .andExpect(jsonPath("$[1].name", is("X5")))
+                .andExpect(jsonPath("$[1].color", is("Orange")));
     }
 }

@@ -1,0 +1,1 @@
+insert into car(id, name, color) VALUES (1, 'polo', 'red');
